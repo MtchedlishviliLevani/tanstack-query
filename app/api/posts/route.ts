@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server';
 import { readPosts,writePosts,Post } from '@/app/lib/server';
 export async function GET() {
   try {
+    // return html format
+  //  return new NextResponse('<h1>Hi</h1>', { headers: { 'Content-Type': 'text/html' } })
+
+  // plain text format
+  //   return new NextResponse('This is plain text', {
+  //   status: 200,
+  //   headers: {
+  //     'Content-Type': 'text/plain',
+  //   },
+  // });
+
     const posts = await readPosts();
     return NextResponse.json(posts);
   } catch (error) {

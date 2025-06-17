@@ -10,6 +10,8 @@ export interface Post {
   createdAt: string;
 }
 
+
+
 export async function readPosts(): Promise<Post[]> {
   try {
     const data = await fs.readFile(dataFilePath, 'utf8');

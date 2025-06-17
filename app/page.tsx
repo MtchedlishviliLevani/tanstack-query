@@ -6,7 +6,6 @@ import { useState } from "react";
 import { fetchPosts, addPost } from "@/app/lib/client";
 
 export default function Home() {
-  const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
   const [newPost, setNewPost] = useState({
     title: "",
@@ -18,8 +17,8 @@ export default function Home() {
     queryKey: ["posts"],
     // Async function that fetches the data.
     queryFn: fetchPosts,
-    // staleTime: 10000, // ✅ 5 minutes: considered "fresh", no refetch
-    // gcTime: 2000, // ✅ 10 minutes: stays in memory when unused
+    staleTime: 1000*30, // ✅ 5 minutes: considered "fresh", no refetch
+    gcTime: 1000 *60*10, // ✅ 10 minutes: stays in memory when unused
     // refetchOnMount: true, // ✅ Don't refetch on remount
     // select:data=>data.filter((title)=>title.title==="Getting Started with Next.js"),
     // enebled
@@ -32,11 +31,17 @@ export default function Home() {
   });
 
 
+  // Hook to get access to the query client instance
+    const queryClient = useQueryClient();
+    
+
+
   const { mutate } = useMutation({
     mutationFn: addPost,
     onSuccess: (newPost) => {
       setShowForm(false);
       setNewPost({ title: "", body: "" });
+      console.log(newPost)
       // Invalidate and refetch posts
       // triggers re-fetch
       queryClient.invalidateQueries({ queryKey: ["posts"] });

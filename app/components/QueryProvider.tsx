@@ -1,16 +1,13 @@
 "use client";
-import Header from "@/app/components/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
- const  queryClient = new QueryClient()
+// to make caching and handle cahcing and operation
+const queryClient = new QueryClient();
 
+// query provider ensures that we have ability to useQuery or useMutation, and so on
 function QueryProvider({ children }: { children: React.ReactNode }) {
-  
   return (
-    <QueryClientProvider client={queryClient}>
-      <Header/>
-{children}
-        </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
 

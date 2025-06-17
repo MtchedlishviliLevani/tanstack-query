@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/app/components/QueryProvider";
+import Header from "@/app/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
         cz-shortcut-listen="true"
       >
         <QueryProvider>
+          <Header/>
         {children}
         </QueryProvider>
       </body>
